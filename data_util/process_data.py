@@ -9,6 +9,7 @@ import os
 from sklearn.neighbors import NearestNeighbors
 from pathlib import Path
 import argparse
+from tqdm import tqdm
 
 def euler2rot(euler_angle):
     batch_size = euler_angle.shape[0]
@@ -93,7 +94,7 @@ if running_step == 2:
     print('--- Step 2: detect landmarks ---')
     fa = face_alignment.FaceAlignment(
         face_alignment.LandmarksType._2D, flip_input=False)
-    for image_path in os.listdir(ori_imgs_dir):
+    for image_path in tqdm(os.listdir(ori_imgs_dir)):
             if image_path.endswith('.jpg'):
                 input = io.imread(os.path.join(ori_imgs_dir, image_path))[:, :, :3]
                 preds = fa.get_landmarks(input)
@@ -103,7 +104,7 @@ if running_step == 2:
         
 max_frame_num = 100000
 valid_img_ids = []
-for i in range(max_frame_num):
+for i in tqdm(range(max_frame_num)):
     if os.path.isfile(os.path.join(ori_imgs_dir, str(i) + '.lms')):
         valid_img_ids.append(i)
 valid_img_num = len(valid_img_ids)
