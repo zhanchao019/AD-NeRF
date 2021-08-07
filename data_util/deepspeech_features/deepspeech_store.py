@@ -10,7 +10,7 @@ import logging
 import hashlib
 
 
-deepspeech_features_repo_url = 'https://github.com/osmr/deepspeech_features'
+deepspeech_features_repo_url = 'https://github.com.cnpmjs.org/osmr/deepspeech_features'
 
 
 def get_deepspeech_model_file(local_model_store_dir_path=os.path.join("~", ".tensorflow", "models")):
